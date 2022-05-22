@@ -46,6 +46,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         Route::get('categories','CategoryController@category');
         ############# Update Category status ############
         Route::post('update-category-status','CategoryController@updateCategoryStatus');
+        ############# Category add edit page #############
+        Route::match(['get', 'post'], 'category-add-edit/{id?}', 'CategoryController@addEditCategory');
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');

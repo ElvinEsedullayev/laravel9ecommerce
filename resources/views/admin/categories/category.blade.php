@@ -33,7 +33,7 @@
 	@endif
 </div>
 <div class="card-body">
-  <a href="{{url('admin/section-add-edit')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Yeni</a><br><br>
+  <a href="{{url('admin/category-add-edit')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Yeni</a><br><br>
 <div class="table-responsive">
 <table id="categories" class="table table-striped mb-0">
 <thead>
@@ -82,7 +82,7 @@
   @endif
 </td>
 <td>
- <a href="{{url('admin/section-add-edit/'.$category['id'])}}">
+ <a href="{{url('admin/category-add-edit/'.$category['id'])}}">
   <i class="fa fa-edit fa-lg"></i>
 </a>
  {{-- <a href="{{url('admin/section-delete/'.$section['id'])}}" title="section" class="confirmDelete">

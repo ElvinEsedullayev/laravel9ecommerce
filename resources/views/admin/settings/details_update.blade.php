@@ -18,7 +18,7 @@
 </div>
 
 <div class="card-header">
-<h4 class="card-title mb-0">Admin Password Update</h4>
+<h4 class="card-title mb-0">Setting Detail Update</h4>
 </div>
 <br>
 <form action="{{url('admin/details-update')}}" method="POST" enctype="multipart/form-data">
