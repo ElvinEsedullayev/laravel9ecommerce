@@ -41,6 +41,15 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         ############# Section add edit page #############
         Route::match(['get', 'post'], 'section-add-edit/{id?}', 'SectionController@addEditSection');
 
+        ########### Brand Management #############endregion
+        Route::get('brands','BrandController@brand');
+        ############# Update Brand status ############
+        Route::post('update-brand-status','BrandController@updateBrandStatus');
+        //############## Brand Delete (sweetalert2)################
+        Route::get('delete-brand/{id}','BrandController@deleteBrand');
+        ############# Brand add edit page #############
+        Route::match(['get', 'post'], 'brand-add-edit/{id?}', 'BrandController@addEditBrand');
+
 
         ###########  Category  #############endregion
         Route::get('categories','CategoryController@category');
@@ -50,6 +59,10 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         Route::match(['get', 'post'], 'category-add-edit/{id?}', 'CategoryController@addEditCategory');
         ########## Append Category level #############
         Route::get('append-categories-level','CategoryController@appendCategoriesLevel');
+        //############## Category Delete (sweetalert2)################
+        Route::get('delete-category/{id}','CategoryController@deleteCategory');
+        //############## Category Image Delete (sweetalert2)################
+        Route::get('delete-category-image/{id}','CategoryController@deleteCategoryImage');
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');

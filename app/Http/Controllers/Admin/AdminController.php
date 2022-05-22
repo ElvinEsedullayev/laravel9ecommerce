@@ -13,10 +13,12 @@ use App\Models\Country;
 use App\Models\VendorBusinessDetail;
 use App\Models\VendorBankDetail;
 use Image;
+use Session;
 class AdminController extends Controller
 {
     public function index()
     {
+        Session::put('page','index');
         return view('admin.index');
     }
 

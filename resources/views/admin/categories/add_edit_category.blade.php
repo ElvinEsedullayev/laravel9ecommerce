@@ -21,7 +21,7 @@
 <h4 class="card-title mb-0">{{$title}}</h4>
 </div>
 <br>
-<form @if(empty($category['id'])) action="{{url('admin/category-add-edit')}}" @else action="{{url('admin/category-add-edit/'.$category['id'])}}" @endif method="POST">
+<form enctype="multipart/form-data" @if(empty($category['id'])) action="{{url('admin/category-add-edit')}}" @else action="{{url('admin/category-add-edit/'.$category['id'])}}" @endif method="POST">
     @csrf
     	@if(Session::has('error'))
 	<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -76,7 +76,7 @@
 
 <div class="form-group">
 <label>Category Url</label>
-<input type="text" class="form-control" @if(!empty($category['url'])) value="{{$category['url']}}" @else value="{{old('url')}}" @endif name="category_url">
+<input type="text" class="form-control" @if(!empty($category['url'])) value="{{$category['url']}}" @else value="{{old('url')}}" @endif name="url">
 </div>
 <div class="form-group">
 <label>Category Meta Title</label>
@@ -91,11 +91,13 @@
 <input type="text" class="form-control" @if(!empty($category['meta_keywords'])) value="{{$category['meta_keywords']}}" @else value="{{old('meta_keywords')}}" @endif name="meta_keywords">
 </div>
 <div class="form-group">
-  @if(!empty($category['category_image']))
-  <img src="{{asset('admin/images/categories/'.$category['category_image'])}}" alt="" width="200">
-  @endif
-<label>Category Image</label>
+  <label>Category Image</label>
 <input type="file" class="form-control" name="category_image">
+  @if(!empty($category['category_image']))
+  <a href="{{url('front/images/categories/'.$category['category_image'])}}" target="_blank">View Image</a> &nbsp;|&nbsp;
+  <a href="Javascript:void(0)" module="category-image" moduleid="{{$category['id']}}" class="confirmDelete">Delete Image</a>
+  @endif
+
 </div>
 <div class="text-right">
 <button type="submit" class="btn btn-primary btn-block">Submit</button>
