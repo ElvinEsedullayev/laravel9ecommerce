@@ -48,6 +48,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         Route::post('update-category-status','CategoryController@updateCategoryStatus');
         ############# Category add edit page #############
         Route::match(['get', 'post'], 'category-add-edit/{id?}', 'CategoryController@addEditCategory');
+        ########## Append Category level #############
+        Route::get('append-categories-level','CategoryController@appendCategoriesLevel');
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');

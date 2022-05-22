@@ -50,9 +50,9 @@
 </thead>
 <tbody>
   @foreach($categories as $category)
-  @if(isset($category['caegory_parent']['caegory_name']) && empty($category['caegory_parent']['caegory_name']))
+  @if(isset($category['category_parent']['category_name']) && !empty($category['category_parent']['category_name']))
     @php 
-      $parent_category = $category['caegory_parent']['caegory_name'];
+      $parent_category = $category['category_parent']['category_name'];
     @endphp
   @else
   @php

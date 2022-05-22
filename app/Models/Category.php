@@ -17,4 +17,9 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category','parent_id')->select('id','category_name');
     }
+
+    public function subcategorie()
+    {
+        return $this->hasMany('App\Models\Category','parent_id')->where('status',1);//categoria ucun..
+    }
 }

@@ -54,6 +54,18 @@
 <input type="text" class="form-control" @if(!empty($category['category_name'])) value="{{$category['category_name']}}" @else placeholder="Add Category Name" @endif name="category_name">
 </div>
 <div class="form-group">
+<label>Select Section</label>
+<select name="section_id" id="section_id" class="form-control">
+  <option value="">Select</option>
+  @foreach($sections as $section)
+  <option value="{{$section['id']}}" @if(!empty($category['section_id']) && $category['section_id']==$section['id']) selected @endif>{{$section['name']}}</option>
+  @endforeach
+</select>
+</div>
+<div id="appendCategoriesLevel">
+  @include('admin.categories.append_categories_level')
+</div>
+<div class="form-group">
 <label>Category Discount</label>
 <input type="text" class="form-control" @if(!empty($category['category_discount'])) value="{{$category['category_discount']}}" @else value="{{old('category_discount')}}" @endif name="category_discount">
 </div>
@@ -64,7 +76,7 @@
 
 <div class="form-group">
 <label>Category Url</label>
-<input type="text" class="form-control" @if(!empty($category['category_url'])) value="{{$category['category_url']}}" @else value="{{old('category_url')}}" @endif name="category_url">
+<input type="text" class="form-control" @if(!empty($category['url'])) value="{{$category['url']}}" @else value="{{old('url')}}" @endif name="category_url">
 </div>
 <div class="form-group">
 <label>Category Meta Title</label>
@@ -77,21 +89,6 @@
 <div class="form-group">
 <label>Category Meta Keywords</label>
 <input type="text" class="form-control" @if(!empty($category['meta_keywords'])) value="{{$category['meta_keywords']}}" @else value="{{old('meta_keywords')}}" @endif name="meta_keywords">
-</div>
-<div class="form-group">
-<label>Select Section</label>
-<select name="section_id" id="" class="form-control">
-  <option value="">Select</option>
-  @foreach($sections as $section)
-  <option value="{{$section['id']}}">{{$section['name']}}</option>
-  @endforeach
-</select>
-</div>
-<div class="form-group">
-<label>Select Category Level</label>
-<select name="parent_id" id="" class="form-control">
-  <option value="0">Main Category</option>
-</select>
 </div>
 <div class="form-group">
   @if(!empty($category['category_image']))
