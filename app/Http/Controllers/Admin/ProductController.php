@@ -28,4 +28,11 @@ class ProductController extends Controller
             return response()->json(['status'=> $status,'product_id'=>$data['product_id']]);
         }
     }
+
+    public function deleteProduct($id)
+    {
+        $product = Product::where('id',$id)->delete();
+        $success = 'Product has been deleted successfully';
+        return redirect()->back()->with('success',$success);
+    }
 }
