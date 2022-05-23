@@ -64,6 +64,11 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         //############## Category Image Delete (sweetalert2)################
         Route::get('delete-category-image/{id}','CategoryController@deleteCategoryImage');
 
+        ##########  Product  #############endregion
+        Route::get('products','ProductController@product');
+        ############# Update product status ############
+        Route::post('update-product-status','ProductController@updateProductStatus');
+
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');
     });
