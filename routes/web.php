@@ -70,6 +70,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         Route::post('update-product-status','ProductController@updateProductStatus');
         //############## product Delete (sweetalert2)################
         Route::get('delete-product/{id}','ProductController@deleteProduct');
+        ############# Product add edit page #############
+        Route::match(['get', 'post'], 'product-add-edit/{id?}', 'ProductController@addEditProduct');
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');
