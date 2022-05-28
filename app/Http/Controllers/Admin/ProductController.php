@@ -9,6 +9,7 @@ use App\Models\Section;
 use App\Models\Brand;
 use App\Models\Category;
 use Auth;
+use Image;
 class ProductController extends Controller
 {
     public function product()
@@ -77,6 +78,35 @@ class ProductController extends Controller
                 'product_color.regax' => 'Valid Product color is required',
             ];
             $this->validate($request,$rules,$customMessage);
+            
+            //Upload image resize: small 250x250,medium 500x500,large 1000x1000
+            if($request->hasFile('product_image')){
+                $img_tmp = $request->file('product_image');
+                 if($img_tmp->isValid()){
+                    $extension = $img_tmp->getClientOriginalExtension();
+                    $imageName = rand(11111,9999999).'.'.$extension;
+                    $largeImagePath = 'front/images/products/large/'.$imageName;
+                    $mediumImagePath = 'front/images/products/medium/'.$imageName;
+                    $smallImagePath = 'front/images/products/small/'.$imageName;
+                    Image::make($img_tmp)->resize(1000,1000)->save($largeImagePath);
+                    Image::make($img_tmp)->resize(500,500)->save($mediumImagePath);
+                    Image::make($img_tmp)->resize(250,250)->save($smallImagePath);
+                    $product->product_image = $imageName;
+                }
+            }
+
+            //upload product video
+            if($request->hasFile('product_video')){
+                $video_tmp = $request->file('product_video');
+                if($video_tmp->isValid()){
+                    $extension = $video_tmp->getClientOriginalExtension();
+                    $videoName = rand(11111,99999).'.'.$extension;
+                    $videoPath = 'front/videos/products/';
+                    $video_tmp->move($videoPath,$videoName);
+                    $product->product_video = $videoName;
+                }
+            }
+
             $categoryDetails = Category::find($data['category_id']);
             $product->section_id = $categoryDetails['section_id'];
             $product->category_id = $data['category_id'];

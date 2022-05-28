@@ -120,14 +120,14 @@
 <input type="checkbox"  value="Yes"  name="is_featured" @if(!empty($product['is_featured']) && $product['is_featured'] ==  'Yes') checked @endif>
 </div>
 <div class="form-group">
-  <label>Product Image</label>
+  <label>Product Image (Recomended size: 1000x1000)</label>
 <input type="file" class="form-control" name="product_image">
   @if(!empty($product['product_image']))
   <a href="{{url('front/images/products/'.$product['product_image'])}}" target="_blank">View Image</a> &nbsp;|&nbsp;
   <a href="Javascript:void(0)" module="product-image" moduleid="{{$product['id']}}" class="confirmDelete">Delete Image</a>
   @endif
 <div class="form-group">
-  <label>Product Video</label>
+  <label>Product Video (Recomended size: Less then 2MB)</label>
 <input type="file" class="form-control" name="product_video">
   @if(!empty($product['product_video']))
   <a href="{{url('front/videos/products/'.$product['product_video'])}}" target="_blank">View video</a> &nbsp;|&nbsp;

@@ -43,6 +43,7 @@
 <th>Product Name</th>
 <th>Product Code</th>
 <th>Product Color</th>
+<th>Product Image</th>
 <th>Section</th>
 <th>Category</th>
 <th>Added By</th>
@@ -57,6 +58,13 @@
 <td>{{$product['product_name']}}</td>
 <td>{{$product['product_code']}}</td>
 <td>{{$product['product_color']}}</td>
+<td>
+  @if(!empty($product['product_image']))
+  <img style="width: 100px;" src="{{asset('front/images/products/small/'.$product['product_image'])}}" alt="">
+  @else
+  <img style="width: 100px;" src="{{asset('front/images/products/small/small.png')}}" alt="">
+  @endif
+</td>
 <td>{{$product['section']['name']}}</td>
 <td>{{$product['category']['category_name']}}</td>
 <td>
