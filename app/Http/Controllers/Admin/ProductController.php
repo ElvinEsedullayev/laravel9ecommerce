@@ -54,6 +54,10 @@ class ProductController extends Controller
             $success = 'Product has been added successfully';
         }else{
             $title = 'Edit Product';
+            $product = Product::find($id);
+            //dd($product);
+            //echo '<pre></pre>'; print_r($product); die;
+            $success = 'Product has been updated successfully';
         }
 
         if($request->isMethod('post')){
@@ -150,5 +154,37 @@ class ProductController extends Controller
         //get brand
         $brands = Brand::where('status',1)->get()->toArray();
         return view('admin.products.add_edit_product')->with(compact('product','title','categories','brands'));
+    }
+
+    public function deleteProductImage($id)
+    {
+        $productImage = Product::select('product_image')->where('id',$id)->first();
+        $small_image_path = 'front/images/products/small/';
+        $medium_image_path = 'front/images/products/medium/';
+        $large_image_path = 'front/images/products/large/';
+        if(file_exists($small_image_path.$productImage->product_image)){
+            unlink($small_image_path.$productImage->product_image);
+        }
+        if(file_exists($medium_image_path.$productImage->product_image)){
+            unlink($medium_image_path.$productImage->product_image);
+        }
+        if(file_exists($large_image_path.$productImage->product_image)){
+            unlink($large_image_path.$productImage->product_image);
+        }
+        Product::where('id',$id)->update(['product_image' => '']);
+        $success = 'Product Image has been deleted successfully';
+        return redirect()->back()->with('success',$success);
+    }
+
+    public function deleteProductVideo($id)
+    {
+        $productVideo = Product::select('product_video')->where('id',$id)->first();
+        $product_video_path = 'front/videos/products/';
+        if(file_exists($product_video_path.$productVideo->product_video)){
+            unlink($product_video_path.$productVideo->product_video);
+        }
+        Product::where('id',$id)->update(['product_video' => '']);
+        $success = 'Product Video has been deleted successfully';
+        return redirect()->back()->with('success',$success);
     }
 }

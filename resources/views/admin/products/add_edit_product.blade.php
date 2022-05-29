@@ -57,9 +57,9 @@
   @foreach($categories as $section)
   <optgroup label="{{$section['name']}}"></optgroup>
   @foreach($section['categories'] as $category)
-  <option value="{{$category['id']}}">&nbsp;&nbsp;&nbsp;--&nbsp;{{$category['category_name']}}</option>
+  <option @if(!empty($product['category_id']) == $category['id']) selected @endif value="{{$category['id']}}">&nbsp;&nbsp;&nbsp;--&nbsp;{{$category['category_name']}}</option>
   @foreach($category['subcategorie'] as $subcategory)
-  <option value="{{$subcategory['id']}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;{{$subcategory['category_name']}}</option>
+  <option @if(!empty($product['category_id']) == $subcategory['id']) selected @endif value="{{$subcategory['id']}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---&nbsp;{{$subcategory['category_name']}}</option>
   @endforeach
   @endforeach
   @endforeach
@@ -70,7 +70,7 @@
 <select name="brand_id" id="brand_id" class="form-control">
   <option value="">Select</option>
   @foreach($brands as $brand)
-  <option value="{{$brand['id']}}">{{$brand['name']}}</option>
+  <option @if(!empty($product['brand_id']) == $brand['id']) selected @endif value="{{$brand['id']}}">{{$brand['name']}}</option>
   @endforeach
 </select>
 </div>
@@ -100,7 +100,7 @@
 </div>
 <div class="form-group">
 <label>Product Description</label>
-<textarea name="description" id="description"  rows="3" class="form-control"></textarea>
+<textarea name="description" id="description"  rows="3" class="form-control">{{$product['description']}}</textarea>
 </div>
 
 <div class="form-group">
@@ -123,7 +123,7 @@
   <label>Product Image (Recomended size: 1000x1000)</label>
 <input type="file" class="form-control" name="product_image">
   @if(!empty($product['product_image']))
-  <a href="{{url('front/images/products/'.$product['product_image'])}}" target="_blank">View Image</a> &nbsp;|&nbsp;
+  <a href="{{url('front/images/products/large/'.$product['product_image'])}}" target="_blank">View Image</a> &nbsp;|&nbsp;
   <a href="Javascript:void(0)" module="product-image" moduleid="{{$product['id']}}" class="confirmDelete">Delete Image</a>
   @endif
 <div class="form-group">
