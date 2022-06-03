@@ -77,10 +77,13 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         //############## Product Video Delete (sweetalert2)################
         Route::get('delete-product-video/{id}','ProductController@deleteProductVideo');
 
+        ############# Attribute add edit page #############
+        Route::match(['get', 'post'], 'attributes-add-edit/{id?}', 'ProductController@addEditAttribute');
+
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');
     });
-    
+
 });
 
 Route::get('/', function () {

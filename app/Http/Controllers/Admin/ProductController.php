@@ -82,7 +82,7 @@ class ProductController extends Controller
                 'product_color.regax' => 'Valid Product color is required',
             ];
             $this->validate($request,$rules,$customMessage);
-            
+
             //Upload image resize: small 250x250,medium 500x500,large 1000x1000
             if($request->hasFile('product_image')){
                 $img_tmp = $request->file('product_image');
@@ -127,7 +127,7 @@ class ProductController extends Controller
             }else{
                  $product->vendor_id = 0;
             }
-            
+
             $product->product_name = $data['product_name'];
             $product->product_code = $data['product_code'];
             $product->product_color = $data['product_color'];
@@ -149,7 +149,7 @@ class ProductController extends Controller
         }
         //Get section with categories and sub categories
         $categories = Section::with('categories')->get()->toArray();
-        
+
         //dd($categories);
         //get brand
         $brands = Brand::where('status',1)->get()->toArray();
@@ -186,5 +186,18 @@ class ProductController extends Controller
         Product::where('id',$id)->update(['product_video' => '']);
         $success = 'Product Video has been deleted successfully';
         return redirect()->back()->with('success',$success);
+    }
+
+
+    public function addEditAttribute(Request $request,$id)
+    {
+        $product = Product::find($id);
+        //dd($product);
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //dd($data);
+            //echo '<pre></pre>'; print_r($data); die;
+        }
+        return view('admin.attributes.add_edit_attribute')->with(compact('product'));
     }
 }
