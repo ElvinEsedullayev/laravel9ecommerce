@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Database\Seeders\ProductAttributeSeeder;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ProductAttribute;
 use Auth;
 use Image;
 class ProductController extends Controller
@@ -191,12 +193,39 @@ class ProductController extends Controller
 
     public function addEditAttribute(Request $request,$id)
     {
-        $product = Product::find($id);
+        $product = Product::select('id','product_name','product_code','product_color','product_price','product_image')->with('attributes')->find($id);
+        //$product = json_decode(json_encode($product),true);
         //dd($product);
         if($request->isMethod('post')){
             $data = $request->all();
             //dd($data);
             //echo '<pre></pre>'; print_r($data); die;
+            foreach($data['sku'] as $key => $value){
+                if(!empty($value)){
+
+                    //sku dublicate check
+                    $skuCount = ProductAttribute::where('sku',$value)->count();
+                    if($skuCount>0){
+                        return redirect()->back()->with('error','SKU already exsist. Please add another!');
+                    }
+
+                    //size dublicate check
+                    $sizeCount = ProductAttribute::where(['product_id' => $id,'size'=>$data['size'][$key]])->count();
+                    if($sizeCount > 0){
+                        return redirect()->back()->with('error','Size already exsist. Please add another!');
+                    }
+
+                    $attribute = new ProductAttribute;
+                    $attribute->product_id = $id;
+                    $attribute->sku = $value;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->status = 1;
+                    $attribute->save();
+                }
+            }
+            return redirect()->back()->with('success','Product Attribute has been added successfully');
         }
         return view('admin.attributes.add_edit_attribute')->with(compact('product'));
     }

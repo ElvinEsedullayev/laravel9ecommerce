@@ -75,7 +75,7 @@
                     <img width="150" src="{{url('front/images/products/large/small.png')}}" alt="">
                     @endif
                 </div>
- 
+
                 <div class="form-group">
                     <div class="field_wrapper">
                     <div>
@@ -87,20 +87,80 @@
                     </div>
                     </div>
                 </div>
-     
-  
-      
-              
-      
-              
+
+
+
+
+
+
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </div>
             </form>
 
-        </div>
+        </div><br>
+        <div class="card-header">
+                <h4 class="card-title mb-0">Attribute</h4>
+            </div>
+            <br>
+        <div class="col-md-12">
+
+
+       <table id="products" class="table table-striped mb-0">
+           <thead>
+
+           <tr>
+               <th>ID</th>
+               <th>Product Size</th>
+               <th>Product SKU</th>
+               <th>Product Price</th>
+               <th>Product Stock</th>
+               <th>Product Image</th>
+               <th>Status</th>
+
+           </tr>
+           </thead>
+           <tbody>
+           @foreach($product['attributes'] as $attribute)
+               <tr>
+                   <td>{{$attribute['id']}}</td>
+                   <td>{{$attribute['size']}}</td>
+                   <td>{{$attribute['sku']}}</td>
+                   <td>{{$attribute['stock']}}</td>
+                   <td>{{$attribute['price']}}</td>
+                   <td>
+                       @if(!empty($attribute['product_image']))
+                           <img style="width: 100px;" src="{{asset('front/images/products/small/'.$attribute['product_image'])}}" alt="">
+                       @else
+                           <img style="width: 100px;" src="{{asset('front/images/products/small/small.png')}}" alt="">
+                       @endif
+                   </td>
+
+
+                   <td>
+                       @if($attribute['status'] == 1)
+                           <a href="Javascript:void(0)" class="updateProductStatus" id="product-{{$attribute['id']}}" product_id="{{$product['id']}}">
+                               {{-- <i class="la la-bookmark" status="Active"></i> --}}
+                               <i class="fa fa-toggle-on fa-lg"  status="Active"></i>
+                           </a>
+                       @else
+                           <a href="Javascript:void(0)" class="updateProductStatus" id="product-{{$attribute['id']}}" product_id="{{$attribute['id']}}">
+                               {{-- <i class="la la-bookmark" status="Inactive"></i> --}}
+                               <i class="fa fa-toggle-off fa-lg"  status="Inactive"></i>
+                           </a>
+                       @endif
+                   </td>
+
+               </tr>
+           @endforeach
+
+           </tbody>
+       </table>
+   </div>
 
     </div>
+    <br>
+
 @endsection
 {{-- @section('js')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
