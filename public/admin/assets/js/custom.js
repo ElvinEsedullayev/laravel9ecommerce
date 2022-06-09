@@ -163,6 +163,37 @@ $(document).ready(function() {
     });
     // Product status end
 
+    //Attribute status update
+    $(document).on('click', '.updateProductAttributStatus', function() {
+        //alert(6)
+        var status = $(this).children('i').attr('status');
+        //alert(status);
+        var attribute_id = $(this).attr('attribute_id');
+        //alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-attribute-status',
+            data: { status: status, attribute_id: attribute_id },
+            success: function(resp) {
+                //alert(resp);
+                if (resp['status'] == 0) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#attribute-' + attribute_id).html("<i class='fa fa-toggle-off fa-lg' status='Inactive'></i>");
+                } else if (resp['status'] == 1) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#attribute-' + attribute_id).html("<i class='fa fa-toggle-on fa-lg' status='Active'></i>");
+                }
+            },
+            error: function() {
+                alert(error);
+            }
+        });
+    });
+    // Attribute status end
+
 
 
     //Category status update

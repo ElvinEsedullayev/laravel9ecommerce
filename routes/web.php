@@ -79,6 +79,10 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
 
         ############# Attribute add edit page #############
         Route::match(['get', 'post'], 'attributes-add-edit/{id?}', 'ProductController@addEditAttribute');
+        ############# Update Attribute status ############
+        Route::post('update-attribute-status','ProductController@updateAttributeStatus');
+        ############# Product add edit page #############
+        Route::match(['get', 'post'], 'attribute-edit/{id}', 'ProductController@updateAttribute');
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');

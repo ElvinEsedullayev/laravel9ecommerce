@@ -105,46 +105,59 @@
             <br>
         <div class="col-md-12">
 
-
-       <table id="products" class="table table-striped mb-0">
+        <form action="{{url('admin/attribute-edit/'.$product['id'])}}" method="POST">
+        @csrf
+       <table id="attributes" class="table table-striped mb-0">
            <thead>
 
            <tr>
                <th>ID</th>
                <th>Product Size</th>
                <th>Product SKU</th>
-               <th>Product Price</th>
+               
                <th>Product Stock</th>
-               <th>Product Image</th>
+               <th>Product Price</th>
+               {{-- <th>Product Image</th> --}}
                <th>Status</th>
 
            </tr>
            </thead>
            <tbody>
            @foreach($product['attributes'] as $attribute)
+           <input type="hidden" name="attributeId[]" value="{{$attribute['id']}}">
                <tr>
                    <td>{{$attribute['id']}}</td>
-                   <td>{{$attribute['size']}}</td>
-                   <td>{{$attribute['sku']}}</td>
-                   <td>{{$attribute['stock']}}</td>
-                   <td>{{$attribute['price']}}</td>
                    <td>
+                      {{$attribute['size']}}
+                       {{-- <input style="width: 70px;" type="text" name="size[]" value=""> --}}
+                </td>
+                   <td>{{$attribute['sku']}}</td>
+                   <td>
+                   
+                       <input style="width: 70px;" type="text" name="stock[]" value="{{$attribute['stock']}}">
+                </td>
+                </td>
+                   <td>
+                       {{$attribute['price']}}
+                       <input style="width: 70px;" type="text" name="price[]" value="{{$attribute['price']}}">
+                    </td>
+                   {{-- <td>
                        @if(!empty($attribute['product_image']))
                            <img style="width: 100px;" src="{{asset('front/images/products/small/'.$attribute['product_image'])}}" alt="">
                        @else
                            <img style="width: 100px;" src="{{asset('front/images/products/small/small.png')}}" alt="">
                        @endif
-                   </td>
+                   </td> --}}
 
 
                    <td>
                        @if($attribute['status'] == 1)
-                           <a href="Javascript:void(0)" class="updateProductStatus" id="product-{{$attribute['id']}}" product_id="{{$product['id']}}">
+                           <a href="Javascript:void(0)" class="updateProductAttributStatus" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}">
                                {{-- <i class="la la-bookmark" status="Active"></i> --}}
                                <i class="fa fa-toggle-on fa-lg"  status="Active"></i>
                            </a>
                        @else
-                           <a href="Javascript:void(0)" class="updateProductStatus" id="product-{{$attribute['id']}}" product_id="{{$attribute['id']}}">
+                           <a href="Javascript:void(0)" class="updateProductAttributStatus" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}">
                                {{-- <i class="la la-bookmark" status="Inactive"></i> --}}
                                <i class="fa fa-toggle-off fa-lg"  status="Inactive"></i>
                            </a>
@@ -153,9 +166,11 @@
 
                </tr>
            @endforeach
-
+               
            </tbody>
        </table>
+       <button type="submit" class="btn btn-primary">Update Attribute</button>
+       </form>
    </div>
 
     </div>
