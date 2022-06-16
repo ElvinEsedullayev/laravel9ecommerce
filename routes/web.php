@@ -84,6 +84,13 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         ############# Product add edit page #############
         Route::match(['get', 'post'], 'attribute-edit/{id}', 'ProductController@updateAttribute');
 
+        ############# Product add multiple image #############
+        Route::match(['get', 'post'], 'add-images/{id}', 'ProductController@addImages');
+        ############# Update ProductImages status ############
+        Route::post('update-images-status','ProductController@updateImagesStatus');
+        //############## Product Image Delete (sweetalert2)################
+        Route::get('delete-image/{id}','ProductController@deleteImage');
+
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');
     });

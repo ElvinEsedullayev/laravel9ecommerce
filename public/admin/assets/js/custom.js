@@ -195,6 +195,38 @@ $(document).ready(function() {
     // Attribute status end
 
 
+    //ProductImages status update
+    $(document).on('click', '.updateProductImagesStatus', function() {
+        //alert(6)
+        var status = $(this).children('i').attr('status');
+        //alert(status);
+        var images_id = $(this).attr('images_id');
+        //alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-images-status',
+            data: { status: status, images_id: images_id },
+            success: function(resp) {
+                //alert(resp);
+                if (resp['status'] == 0) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#images-' + images_id).html("<i class='fa fa-toggle-off fa-lg' status='Inactive'></i>");
+                } else if (resp['status'] == 1) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#images-' + images_id).html("<i class='fa fa-toggle-on fa-lg' status='Active'></i>");
+                }
+            },
+            error: function() {
+                alert(error);
+            }
+        });
+    });
+    // ProductImages status end
+
+
 
     //Category status update
     $(document).on('click', '.updateCategoryStatus', function() {

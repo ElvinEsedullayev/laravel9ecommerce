@@ -94,6 +94,9 @@
     <a href="{{url('admin/attributes-add-edit/'.$product['id'])}}">
         <i class="fa fa-plus-square fa-lg"></i>
     </a>
+     <a title="Add Multiple Images" href="{{url('admin/add-images/'.$product['id'])}}">
+        <i class="fa fa-images fa-lg"></i>
+    </a>
  {{-- <a href="{{url('admin/section-delete/'.$section['id'])}}" title="section" class="confirmDelete">
   <i class="fa fa-trash fa-lg"></i> --}}
 
