@@ -97,9 +97,13 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
 
 });
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('App\Http\Controllers\Front')->group(function(){
+    Route::get('/','FrontHomeController@index');
 });
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
