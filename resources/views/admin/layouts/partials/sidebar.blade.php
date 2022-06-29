@@ -48,6 +48,15 @@
 
 </ul>
 </li>
+
+<li class="submenu">
+<a href="#"><i class="fas fa-users"></i> <span> Banners Management</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="{{url('admin/banners')}}">Banners </a></li>
+
+
+</ul>
+</li>
 @endif
 <li class="submenu">
 <a href="#"><i class="fas fa-align-justify"></i> <span>Categories Management</span> <span class="menu-arrow"></span></a>

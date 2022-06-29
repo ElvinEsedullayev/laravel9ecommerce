@@ -91,6 +91,13 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         //############## Product Image Delete (sweetalert2)################
         Route::get('delete-image/{id}','ProductController@deleteImage');
 
+        //########### Banner PAges ##################
+        Route::get('banners','BannerController@banner');
+        ############# Update ProductImages status ############
+        Route::post('update-banner-status','BannerController@updateBannerStatus');
+        //############## banner  Delete (sweetalert2)################
+        Route::get('delete-banner/{id}','BannerController@deletebanner');
+
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');
     });
