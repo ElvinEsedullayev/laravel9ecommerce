@@ -34,8 +34,8 @@
 </div>
 <div class="card-body">
   <a href="{{url('admin/product-add-edit')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Yeni</a><br><br>
-<div class="table-responsive">
-<table id="products" class="table table-striped mb-0">
+<div class="">
+<table id="products" class="table table-bordered table-striped mb-0">
 <thead>
 
 <tr>
@@ -48,7 +48,7 @@
 <th>Category</th>
 <th>Added By</th>
 <th>Status</th>
-<th>Action</th>
+<th style="width: 120px;">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -87,7 +87,7 @@
 </a>
   @endif
 </td>
-<td>
+<td style="width: 120px;">
  <a href="{{url('admin/product-add-edit/'.$product['id'])}}">
   <i class="fa fa-edit fa-lg"></i>
 </a>

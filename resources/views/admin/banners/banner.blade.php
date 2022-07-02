@@ -72,7 +72,7 @@
   @endif
 </td>
 <td>
- <a href="{{url('admin/brand-add-edit/'.$banner['id'])}}">
+ <a href="{{url('admin/banner-add-edit/'.$banner['id'])}}">
   <i class="fa fa-edit fa-lg"></i>
 </a>
  {{-- <a href="{{url('admin/section-delete/'.$section['id'])}}" title="section" class="confirmDelete">

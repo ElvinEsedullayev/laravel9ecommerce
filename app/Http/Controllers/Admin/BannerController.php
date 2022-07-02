@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Banner;
+use Image;
 class BannerController extends Controller
 {
     public function banner()
@@ -38,5 +39,43 @@ class BannerController extends Controller
         Banner::where('id',$id)->delete();
         $success = 'Banner has been deleted successfully';
         return redirect()->back()->with('success',$success);
+    }
+
+    public function addEditBanner(Request $request,$id=null)
+    {
+        if($id == ''){
+            $title = 'Add Banner';
+            $banner = new Banner;
+            $success = 'Banner has been added successfully!';
+        }else{
+            $title = 'Edit Banner';
+            $banner = Banner::find($id);
+            $success = 'Banner has been updated successfully';
+        }
+        if($request->isMethod('post')){
+            $data = $request->all();
+            //dd($data);
+            $banner->title = $data['title'];
+            $banner->alt = $data['alt'];
+            $banner->link = $data['link'];
+            $banner->status = 1;
+            if($request->hasFile('image')){
+                $img_tmp = $request->file('image');
+                if($img_tmp->isValid()){
+                    $extension = $img_tmp->getClientOriginalExtension();
+                    $imageName = rand(11111,9999999).'.'.$extension;
+                    $imagePath = 'front/images/banner/'.$imageName;
+                    Image::make($img_tmp)->resize(1920,750)->save($imagePath);
+                    $banner->image = $imageName;
+                }
+            
+            }else{
+                $banner->image = '';//add edende sekil yoxcusa xeta vermesin
+            }
+            $banner->save();
+            return redirect('admin/banners')->with('success',$success);
+        }
+
+        return view('admin.banners.add_edit_banner')->with(compact('title','banner'));
     }
 }
