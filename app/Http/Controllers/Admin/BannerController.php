@@ -32,7 +32,7 @@ class BannerController extends Controller
     public function deletebanner($id)
     {
         $bannerImage = Banner::where('id',$id)->first();
-        $imagePath = 'front/images/banner/';  
+        $imagePath = 'front/images/banner/';
         if(file_exists($imagePath.$bannerImage->image)){
             unlink($imagePath.$bannerImage->image);
         }
@@ -52,23 +52,35 @@ class BannerController extends Controller
             $banner = Banner::find($id);
             $success = 'Banner has been updated successfully';
         }
+
+
         if($request->isMethod('post')){
             $data = $request->all();
             //dd($data);
+            $banner->type = $data['type'];
             $banner->title = $data['title'];
             $banner->alt = $data['alt'];
             $banner->link = $data['link'];
             $banner->status = 1;
+
+            if($data['type'] == 'Slider'){
+                $width = 1920;
+                $height = 750;
+            }else if($data['type'] == 'Fix'){
+                $width = 1920;
+                $height = 450;
+            }
+
             if($request->hasFile('image')){
                 $img_tmp = $request->file('image');
                 if($img_tmp->isValid()){
                     $extension = $img_tmp->getClientOriginalExtension();
                     $imageName = rand(11111,9999999).'.'.$extension;
                     $imagePath = 'front/images/banner/'.$imageName;
-                    Image::make($img_tmp)->resize(1920,750)->save($imagePath);
+                    Image::make($img_tmp)->resize($width,$height)->save($imagePath);
                     $banner->image = $imageName;
                 }
-            
+
             }else{
                 $banner->image = '';//add edende sekil yoxcusa xeta vermesin
             }

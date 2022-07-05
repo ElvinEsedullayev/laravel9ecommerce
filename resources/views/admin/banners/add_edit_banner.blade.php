@@ -47,7 +47,7 @@
             @endforeach
         </ul>
     </div>
-@endif    
+@endif
 
 
 
@@ -72,6 +72,15 @@
   <a href="Javascript:void(0)" module="banner-image" moduleid="{{$banner['id']}}" class="confirmDelete">Delete Image</a>
   @endif
 </div>
+<div class="form-group">
+    <label>Banner Type </label>
+    <select name="type" id="" class="form-control" required>
+        <option value="">Select</option>
+        <option value="Slider" @if(!empty($banner['type']) && $banner['type'] == 'Slider') selected @endif>Slider</option>
+        <option value="Fix" @if(!empty($banner['type']) && $banner['type'] == 'Fix') selected @endif>Fix</option>
+    </select>
+</div>
+
 
 <div class="text-right">
 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -81,7 +90,7 @@
 </div>
 
 <div>
-  
+
 </div>
 
 </div>

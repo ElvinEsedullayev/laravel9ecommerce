@@ -37,11 +37,12 @@
 <div class="table-responsive">
 <table id="banners" class="table table-striped mb-0">
 <thead>
-  
+
 <tr>
 <th>ID</th>
 <th>Image</th>
 <th>Title</th>
+<th>Type</th>
 <th>Link</th>
 <th>Status</th>
 <th>Action</th>
@@ -57,14 +58,15 @@
   @endif
 </td>
 <td>{{$banner['title']}}</td>
+ <td>{{$banner['type']}}</td>
 <td>{{$banner['link']}}</td>
 <td>
-  @if($banner['status'] == 1) 
+  @if($banner['status'] == 1)
   <a href="Javascript:void(0)" class="updateBannerStatus" id="banner-{{$banner['id']}}" banner_id="{{$banner['id']}}">
  {{-- <i class="la la-bookmark" status="Active"></i> --}}
  <i class="fa fa-toggle-on fa-lg"  status="Active"></i>
 </a>
-  @else 
+  @else
   <a href="Javascript:void(0)" class="updateBannerStatus" id="banner-{{$banner['id']}}" banner_id="{{$banner['id']}}">
  {{-- <i class="la la-bookmark" status="Inactive"></i> --}}
  <i class="fa fa-toggle-off fa-lg"  status="Inactive"></i>

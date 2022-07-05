@@ -99,6 +99,9 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         Route::get('delete-banner/{id}','BannerController@deletebanner');
         //add edit banner
         Route::match(['get','post'],'banner-add-edit/{id?}','BannerController@addEditBanner');
+        Route::get('test',function (){
+            return 'salam';
+        });
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');
