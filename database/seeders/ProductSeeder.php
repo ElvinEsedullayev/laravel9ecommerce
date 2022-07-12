@@ -36,6 +36,7 @@ class ProductSeeder extends Seeder
                 'meta_description' => '', 
                 'meta_keywords' => '',
                 'is_featured' => 'Yes',
+                'is_bestseller' => 'Yes',
                 'status' => 1
             ],
              [
@@ -59,6 +60,7 @@ class ProductSeeder extends Seeder
                 'meta_description' => '', 
                 'meta_keywords' => '',
                 'is_featured' => 'Yes',
+                'is_bestseller' => 'Yes',
                 'status' => 1
             ],
           
