@@ -17,8 +17,9 @@ class FrontProductController extends Controller
         if($categoryCount > 0){
             $categoryDetails = Category::catDetails($url);
             //dd($categoryDetails);
-            $categoryProducts = Product::whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->get()->toArray();
-            //dd($categoryproducts);
+            $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->paginate(3);
+            //dd($categoryProducts);
+            //dd($categoryDetails);
             //echo 'cat exists';die;
             return view('front.products.listing')->with(compact('categoryDetails','categoryProducts'));
         }else{

@@ -11,7 +11,7 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="index.html">Home</a>
+                        <a href="{{url('/')}}">Home</a>
                     </li>
                     <li class="is-marked">
                         <a href="listing.html">Shop</a>
@@ -28,14 +28,9 @@
             <div class="shop-intro">
                 <ul class="bread-crumb">
                     <li class="has-separator">
-                        <a href="index.html">Home</a>
+                        <a href="{{url('/')}}">Home</a>
                     </li>
-                    <li class="has-separator">
-                        <a href="shop-v1-root-category.html">Men Clothing </a>
-                    </li>
-                    <li class="is-marked">
-                        <a href="listing.html">T-Shirts</a>
-                    </li>
+                   @php  echo $categoryDetails['breadcrumbs'];   @endphp
                 </ul>
             </div>
             <!-- Shop-Intro /- -->
@@ -68,13 +63,23 @@
                         </div>
                         <!-- //end Toolbar Sorter 1  -->
                         <!-- Toolbar Sorter 2  -->
-                        <div class="toolbar-sorter-2">
+                        {{-- <div class="toolbar-sorter-2">
                             <div class="select-box-wrapper">
                                 <label class="sr-only" for="show-records">Show Records Per Page</label>
                                 <select class="select-box" id="show-records">
                                     <option selected="selected" value="">Show: 8</option>
                                     <option value="">Show: 16</option>
                                     <option value="">Show: 28</option>
+                                </select>
+                            </div>
+                        </div> --}}
+                        <div class="toolbar-sorter-2">
+                            <div class="select-box-wrapper">
+                                <label class="sr-only" for="show-records">Show Records Per Page</label>
+                                <select class="select-box" id="show-records">
+                                    <option selected="selected" value="">Showing: {{count($categoryProducts)}}</option>
+                                    <option value="">Showing: All</option>
+                                    
                                 </select>
                             </div>
                         </div>
@@ -114,7 +119,7 @@
                                                 <a href="listing.html">{{$product['product_color']}}</a>
                                             </li>
                                             <li>
-                                                <a href="shop-v3-sub-sub-category.html">Hoodies</a>
+                                                <a href="shop-v3-sub-sub-category.html">{{$product['brand']['name']}}</a>
                                             </li>
                                         </ul>
                                         <h6 class="item-title">
@@ -149,19 +154,24 @@
                                                 @endif
                                             </div>
                                 </div>
+                                @php $isProductNew = Product::isProductNew($product['id']); @endphp
+                                @if($isProductNew == 'Yes')
                                 <div class="tag new">
                                     <span>NEW</span>
                                 </div>
+                                @endif
                             </div>
                         </div>
                        @endforeach 
                       
                     </div>
+                    <div>{{$categoryProducts->links()}}</div>
+                    <div>{{$product['description']}}</div>
                     <!-- Row-of-Product-Container /- -->
                 </div>
                 <!-- Shop-Right-Wrapper /- -->
                 <!-- Shop-Pagination -->
-                <div class="pagination-area">
+                {{-- <div class="pagination-area">
                     <div class="pagination-number">
                         <ul>
                             <li style="display: none">
@@ -191,7 +201,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Shop-Pagination /- -->
             </div>
         </div>
