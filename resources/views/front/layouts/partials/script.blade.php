@@ -52,3 +52,5 @@ ga('send', 'pageview')
 <script type="text/javascript" src="{{url('front/js/owl.carousel.min.js')}}"></script>
 <!-- Main -->
 <script type="text/javascript" src="{{url('front/js/app.js')}}"></script>
+<!-- Front Custom -->
+<script type="text/javascript" src="{{url('front/js/custom.js')}}"></script>

@@ -17,7 +17,24 @@ class FrontProductController extends Controller
         if($categoryCount > 0){
             $categoryDetails = Category::catDetails($url);
             //dd($categoryDetails);
-            $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->paginate(3);
+            $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
+
+            //check latest product
+            if(isset($_GET['sort']) && !empty($_GET['sort'])){
+                if($_GET['sort'] == 'product_latest'){
+                    $categoryProducts->orderBy('products.id','Desc');
+                }else if($_GET['sort'] == 'price_lowest'){
+                    $categoryProducts->orderBy('products.product_price','Asc');
+                }else if($_GET['sort'] == 'price_highest'){
+                    $categoryProducts->orderBy('products.product_price','Desc');
+                }else if($_GET['sort'] == 'name_a_z'){
+                    $categoryProducts->orderBy('products.product_name','Asc');
+                }else if($_GET['sort'] == 'name_z_a'){
+                    $categoryProducts->orderBy('products.product_name','Desc');
+                }
+            }
+
+            $categoryProducts = $categoryProducts->paginate(3);
             //dd($categoryProducts);
             //dd($categoryDetails);
             //echo 'cat exists';die;
