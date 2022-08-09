@@ -85,6 +85,19 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         ############# Product add edit page #############
         Route::match(['get', 'post'], 'attribute-edit/{id}', 'ProductController@updateAttribute');
 
+        ############# Product Filter  #############
+        Route::get('filters','ProductsFilterController@filter');
+        ############# Product Filter Value #############
+        Route::get('product-filter-values','ProductsFilterController@filterValue');
+        ############# Update filter status ############
+        Route::post('update-filter-status','ProductsFilterController@updateFilterStatus');
+        ############# Update filter Value status ############
+        Route::post('update-filter-value-status','ProductsFilterController@updateFilterValueStatus');
+        ############# add edit filter   ############
+        Route::match(['get','post'],'filter-add-edit/{id?}','ProductsFilterController@addEditFilter');
+        ############# add edit filter value   ############
+        Route::match(['get','post'],'filter-value-add-edit/{id?}','ProductsFilterController@addEditFilterValue');
+
         ############# Product add multiple image #############
         Route::match(['get', 'post'], 'add-images/{id}', 'ProductController@addImages');
         ############# Update ProductImages status ############
@@ -100,9 +113,7 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function(
         Route::get('delete-banner/{id}','BannerController@deletebanner');
         //add edit banner
         Route::match(['get','post'],'banner-add-edit/{id?}','BannerController@addEditBanner');
-        Route::get('test',function (){
-            return 'salam';
-        });
+       
 
         ############ Admin Logout ##########
         Route::get('logout','AdminController@logout')->name('admin.logout');

@@ -8,6 +8,8 @@ $(document).ready(function() {
     $('#products').DataTable();
     //check admin password
     $('#banners').DataTable();
+    //check admin password
+    $('#filters').DataTable();
 
 
 
@@ -291,6 +293,69 @@ $(document).ready(function() {
         });
     });
     // banner status end
+
+    //Filter status update
+    $(document).on('click', '.updateFilterStatus', function() {
+        //alert(6)
+        var status = $(this).children('i').attr('status');
+        //alert(status);
+        var filter_id = $(this).attr('filter_id');
+        //alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-filter-status',
+            data: { status: status, filter_id: filter_id },
+            success: function(resp) {
+                //alert(resp);
+                if (resp['status'] == 0) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#filter-' + filter_id).html("<i class='fa fa-toggle-off fa-lg' status='Inactive'></i>");
+                } else if (resp['status'] == 1) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#filter-' + filter_id).html("<i class='fa fa-toggle-on fa-lg' status='Active'></i>");
+                }
+            },
+            error: function() {
+                alert(error);
+            }
+        });
+    });
+    // FIlter status end
+
+
+    //Filter Value status update
+    $(document).on('click', '.updateFilterValueStatus', function() {
+        //alert(6)
+        var status = $(this).children('i').attr('status');
+        //alert(status);
+        var filtervalue_id = $(this).attr('filtervalue_id');
+        //alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-filter-value-status',
+            data: { status: status, filtervalue_id: filtervalue_id },
+            success: function(resp) {
+                //alert(resp);
+                if (resp['status'] == 0) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#filtervalue-' + filtervalue_id).html("<i class='fa fa-toggle-off fa-lg' status='Inactive'></i>");
+                } else if (resp['status'] == 1) {
+                    // $('#admin-' + admin_id).html("<i class='la la-bookmark' status='Inactive'></i>");
+                    $('#filtervalue-' + filtervalue_id).html("<i class='fa fa-toggle-on fa-lg' status='Active'></i>");
+                }
+            },
+            error: function() {
+                alert(error);
+            }
+        });
+    });
+    // FIlter Value status end
 
 
     //simple confrim delete

@@ -65,6 +65,7 @@
 <li><a href="{{url('admin/categories')}}">Categories</a></li>
 <li><a href="{{url('admin/brands')}}">Brands</a></li>
 <li><a href="{{url('admin/products')}}">Products</a></li>
+<li><a href="{{url('admin/filters')}}">Products Filters</a></li>
 </ul>
 </li>
 <li class="menu-title">
